@@ -6,32 +6,73 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <script defer src="{{ url_for('static', filename='script.js') }}"></script>
   <title>ClearWater</title>
+
   <style>
-  @keyframes fadeInUp {
-    from { opacity: 0; transform: translateY(30px); }
-    to   { opacity: 1; transform: translateY(0); }
-  }
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .fade-in {
+      opacity: 0;
+      animation: fadeInUp 0.8s ease-out forwards;
+    }
+    .fade-in-delay-1 { animation-delay: 0.2s; }
+    .fade-in-delay-2 { animation-delay: 0.4s; }
+    .fade-in-delay-3 { animation-delay: 0.6s; }
 
-  .fade-in {
-    opacity: 0;
-    animation: fadeInUp 0.8s ease-out forwards;
-    transform: translateY(0); /* Forces final position */
-  }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .animate-fade-in {
+      animation: fadeIn 0.6s ease-out forwards;
+    }
 
-  .fade-in-delay-1 { animation-delay: 0.2s; }
-  .fade-in-delay-2 { animation-delay: 0.4s; }
-  .fade-in-delay-3 { animation-delay: 0.6s; }
+    .nav-link {
+      position: relative;
+      font-weight: 500;
+      color: #1f2937;
+      transition: color 0.3s;
+    }
+    .nav-link:hover {
+      color: #2563eb;
+    }
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      width: 0%;
+      height: 2px;
+      bottom: -2px;
+      left: 0;
+      background-color: #2563eb;
+      transition: width 0.3s;
+    }
+    .nav-link:hover::after {
+      width: 100%;
+    }
 
-  @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(-20px); }
-    to   { opacity: 1; transform: translateY(0); }
-  }
+    .mobile-link {
+      display: block;
+      color: #1f2937;
+      font-weight: 500;
+      padding: 0.75rem 1rem;
+      transition: color 0.3s;
+    }
+    .mobile-link:hover {
+      color: #2563eb;
+      background-color: #f0f9ff;
+    }
 
-  .animate-fade-in {
-    animation: fadeIn 0.6s ease-out forwards;
-    transform: translateY(0); /* Ensures no leftover shift */
-}
-</style>
+    .mobile-menu-enter {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease-in-out;
+    }
+
+    .mobile-menu-enter-active {
+      max-height: 500px;
+    }
+  </style>
 </head>
 
 <body class="bg-gray-100 font-sans">
@@ -40,8 +81,8 @@
 <nav class="bg-white shadow-md fixed w-full z-50">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="flex justify-between items-center h-16 animate-fade-in">
-      
-      <!-- Logo (No bounce) -->
+
+      <!-- Logo -->
       <div class="flex-shrink-0">
         <a href="#logo" class="flex items-center text-2xl sm:text-3xl font-extrabold text-blue-600 hover:text-blue-800 transition duration-300">
           <svg class="w-7 h-7 sm:w-8 sm:h-8 mr-2" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
@@ -53,29 +94,20 @@
 
       <!-- Desktop Nav -->
       <div class="hidden md:flex space-x-6">
-        <a href="#" class="relative group text-gray-800 hover:text-blue-600 font-medium transition">
-          Home
-          <span class="absolute left-0 -bottom-1 w-0 h-0.5 bg-blue-600 group-hover:w-full transition-all duration-300"></span>
-        </a>
-        <a href="#Reasonsofpollution" class="relative group text-gray-800 hover:text-blue-600 font-medium transition">
-          Reasons
-          <span class="absolute left-0 -bottom-1 w-0 h-0.5 bg-blue-600 group-hover:w-full transition-all duration-300"></span>
-        </a>
-        <a href="#laws" class="relative group text-gray-800 hover:text-blue-600 font-medium transition">
-          Laws
-          <span class="absolute left-0 -bottom-1 w-0 h-0.5 bg-blue-600 group-hover:w-full transition-all duration-300"></span>
-        </a>
-        <a href="#contact" class="relative group text-gray-800 hover:text-blue-600 font-medium transition">
-          Contact
-          <span class="absolute left-0 -bottom-1 w-0 h-0.5 bg-blue-600 group-hover:w-full transition-all duration-300"></span>
-        </a>
+        <a href="#" class="nav-link">Home</a>
+        <a href="#Reasonsofpollution" class="nav-link">Reasons</a>
+        <a href="#laws" class="nav-link">Laws</a>
+        <a href="#contact" class="nav-link">Contact</a>
       </div>
 
       <!-- Mobile Toggle -->
       <div class="md:hidden">
-        <button id="mobile-menu-toggle" class="text-gray-600 focus:outline-none">
-          <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+        <button id="mobile-menu-toggle" aria-label="Toggle Menu" aria-expanded="false" class="text-gray-600 focus:outline-none">
+          <svg id="menu-icon" class="w-6 h-6 block" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+          <svg id="close-icon" class="w-6 h-6 hidden" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
           </svg>
         </button>
       </div>
@@ -83,11 +115,11 @@
   </div>
 
   <!-- Mobile Menu -->
-  <div id="mobile-menu" class="hidden md:hidden px-4 pb-4 space-y-2 bg-white shadow-md">
-    <a href="#" class="block text-gray-700 hover:text-blue-600 transition">Home</a>
-    <a href="#Reasonsofpollution" class="block text-gray-700 hover:text-blue-600 transition">Reasons</a>
-    <a href="#laws" class="block text-gray-700 hover:text-blue-600 transition">Laws</a>
-    <a href="#contact" class="block text-gray-700 hover:text-blue-600 transition">Contact</a>
+  <div id="mobile-menu" class="hidden md:hidden px-4 pb-4 bg-white shadow-md transition-all duration-300 ease-in-out">
+    <a href="#" class="mobile-link">Home</a>
+    <a href="#Reasonsofpollution" class="mobile-link">Reasons</a>
+    <a href="#laws" class="mobile-link">Laws</a>
+    <a href="#contact" class="mobile-link">Contact</a>
   </div>
 </nav>
 
