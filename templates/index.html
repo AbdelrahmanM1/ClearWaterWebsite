@@ -1,12 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <!-- Basic Meta Tags -->
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script defer src="{{ url_for('static', filename='script.js') }}"></script>
-  <title>ClearWater</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>ClearWater | Protect Water from Pollution</title>
+  <meta name="description" content="ClearWater is a campaign focused on raising awareness and taking action to protect the world's water resources from pollution.">
+  <meta name="keywords" content="Water Pollution, Clean Water, Environmental Awareness, Save Water, Reduce Waste, Environmental Protection, Ocean Cleanup, Eco Laws">
+  <meta name="author" content="Abdelrahman Moharram">
 
+  <!-- Open Graph Meta (for social media previews) -->
+  <meta property="og:title" content="ClearWater - Protect Water from Pollution">
+  <meta property="og:description" content="Join us in protecting Earth's most precious resource. Learn about water pollution and take action.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://clearwaterwebsite-production.up.railway.app">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="ClearWater - Save Water from Pollution">
+  <meta name="twitter:description" content="Help raise awareness and act against water pollution.">
+  <!-- Canonical URL -->
+  <link rel="canonical" href="https://clearwaterwebsite-production.up.railway.app">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <!-- TailwindCSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- External JS -->
+  <script defer src="{{ url_for('static', filename='script.js') }}"></script>
   <style>
     @keyframes fadeInUp {
       from { opacity: 0; transform: translateY(30px); }
