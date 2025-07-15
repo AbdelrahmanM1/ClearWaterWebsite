@@ -1,8 +1,15 @@
 from flask import Flask, render_template, request, redirect, url_for
 from markupsafe import escape
+from dotenv import load_dotenv
 import os
 
+load_dotenv()
+
 app = Flask(__name__)
+
+EMAILJS_PUBLIC_KEY = os.getenv("EMAILJS_PUBLIC_KEY")
+EMAILJS_SERVICE_ID = os.getenv("EMAILJS_SERVICE_ID")
+EMAILJS_TEMPLATE_ID = os.getenv("EMAILJS_TEMPLATE_ID")
 
 @app.route('/')
 def index():
@@ -10,7 +17,12 @@ def index():
 
 @app.route('/get-involved', methods=['GET'])
 def get_involved():
-    return render_template('get_involved.html')
+    return render_template(
+        'get_involved.html',
+        emailjs_public_key=EMAILJS_PUBLIC_KEY,
+        emailjs_service_id=EMAILJS_SERVICE_ID,
+        emailjs_template_id=EMAILJS_TEMPLATE_ID
+    )
 
 @app.route('/submit', methods=['POST'])
 def submit():
