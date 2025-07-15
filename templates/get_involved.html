@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
   <title>Get Involved - ClearWater</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
@@ -15,7 +16,7 @@
 </head>
 <body class="bg-gradient-to-br from-blue-100 via-white to-blue-50 min-h-screen flex items-center justify-center px-4 py-12">
 
-  <form method="POST" action="/submit" class="bg-white w-full max-w-xl rounded-3xl shadow-2xl p-10 border-t-4 border-blue-600 animate-fade-in space-y-6">
+  <form id="suggestion-form" class="bg-white w-full max-w-xl rounded-3xl shadow-2xl p-10 border-t-4 border-blue-600 animate-fade-in space-y-6" method="POST" action="/submit">
     <!-- Title -->
     <div class="text-center">
       <h1 class="text-4xl font-extrabold text-blue-700 flex items-center justify-center gap-2">
@@ -55,7 +56,7 @@
     </button>
   </form>
 
-  <!-- Optional Tailwind Animation -->
+  <!-- EmailJS & Tailwind Animation Config -->
   <script>
     tailwind.config = {
       theme: {
@@ -71,7 +72,27 @@
           }
         }
       }
-    }
+    };
+
+    document.addEventListener("DOMContentLoaded", () => {
+      emailjs.init("{{ emailjs_public_key }}");
+
+      const form = document.getElementById("suggestion-form");
+      form.addEventListener("submit", function(e) {
+        e.preventDefault(); // stop normal submit
+
+        emailjs.sendForm(
+          "{{ emailjs_service_id }}",
+          "{{ emailjs_template_id }}",
+          this
+        ).then(() => {
+          form.submit(); // only submit to Flask after email is sent
+        }).catch((error) => {
+          alert("❌ Failed to send email. Try again.");
+          console.error("EmailJS Error:", error);
+        });
+      });
+    });
   </script>
 
 </body>
