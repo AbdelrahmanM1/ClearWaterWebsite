@@ -42,3 +42,28 @@ document.addEventListener("DOMContentLoaded", function () {
   }
   window.scrollTo({ top: 0, left: 0, behavior: "auto" });
 });
+
+
+  document.addEventListener("DOMContentLoaded", () => {
+    const navbar = document.getElementById("navbar");
+
+    window.addEventListener("scroll", () => {
+      if (window.scrollY > 20) {
+        navbar.classList.add(
+          "bg-white/60",
+          "backdrop-blur-lg",
+          "shadow-xl",
+          "py-1"
+        );
+        navbar.classList.remove("bg-white/90", "py-3");
+      } else {
+        navbar.classList.remove(
+          "bg-white/60",
+          "backdrop-blur-lg",
+          "shadow-xl",
+          "py-1"
+        );
+        navbar.classList.add("bg-white/90", "py-3");
+      }
+    });
+  });
