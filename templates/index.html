@@ -97,54 +97,72 @@
     .mobile-menu-enter-active {
       max-height: 500px;
     }
+@keyframes fadeSlideDown {
+    0% {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.fade-slide {
+  animation: fadeSlideDown 0.6s ease-out;
+}
   </style>
 </head>
 
 <body class="bg-gray-100 font-sans">
 
 <!-- Navbar -->
-<nav class="bg-white shadow-md fixed w-full z-50">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="flex justify-between items-center h-16 animate-fade-in">
+<nav
+  id="navbar"
+  class="fade-slide fixed top-4 left-1/2 transform -translate-x-1/2 z-50 w-[95%] max-w-7xl
+         bg-white/90 backdrop-blur-md shadow-lg
+         rounded-xl md:rounded-full
+         px-6 py-3
+         transition-all duration-300 ease-in-out transition-opacity"
+>
+  <div class="flex justify-between items-center h-14 animate-fade-in">
 
-      <!-- Logo -->
-      <div class="flex-shrink-0">
-        <a href="#logo" class="flex items-center text-2xl sm:text-3xl font-extrabold text-blue-600 hover:text-blue-800 transition duration-300">
-          <svg class="w-7 h-7 sm:w-8 sm:h-8 mr-2" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M12 2C12 2 7 8 7 12a5 5 0 0010 0c0-4-5-10-5-10z" />
-          </svg>
-          ClearWater
-        </a>
-      </div>
+    <!-- Logo -->
+    <a href="#logo" class="flex items-center text-xl sm:text-2xl font-extrabold text-blue-600 hover:text-blue-800 transition duration-300">
+      <svg class="w-7 h-7 sm:w-8 sm:h-8 mr-2" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M12 2C12 2 7 8 7 12a5 5 0 0010 0c0-4-5-10-5-10z" />
+      </svg>
+      ClearWater
+    </a>
 
-      <!-- Desktop Nav -->
-      <div class="hidden md:flex space-x-6">
-        <a href="#" class="nav-link">Home</a>
-        <a href="#Reasonsofpollution" class="nav-link">Reasons</a>
-        <a href="#laws" class="nav-link">Laws</a>
-        <a href="#contact" class="nav-link">Contact</a>
-      </div>
+    <!-- Desktop Nav -->
+    <div class="hidden md:flex items-center space-x-6">
+      <a href="#" class="nav-link">Home</a>
+      <a href="#Reasonsofpollution" class="nav-link">Reasons</a>
+      <a href="#laws" class="nav-link">Laws</a>
+      <a href="#contact" class="nav-link">Contact</a>
+      <a href="/get-involved" class="ml-4 bg-blue-600 text-white px-4 py-2 rounded-full hover:bg-blue-700 transition transform hover:scale-105 text-sm font-semibold">Join Now</a>
+    </div>
 
-      <!-- Mobile Toggle -->
-      <div class="md:hidden">
-        <button id="mobile-menu-toggle" aria-label="Toggle Menu" aria-expanded="false" class="text-gray-600 focus:outline-none">
-          <svg id="menu-icon" class="w-6 h-6 block" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
-          </svg>
-          <svg id="close-icon" class="w-6 h-6 hidden" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
-          </svg>
-        </button>
-      </div>
+    <!-- Mobile Toggle -->
+    <div class="md:hidden">
+      <button id="mobile-menu-toggle" aria-label="Toggle Menu" aria-expanded="false" class="text-gray-600 focus:outline-none">
+        <svg id="menu-icon" class="w-6 h-6 block" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+        <svg id="close-icon" class="w-6 h-6 hidden" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </button>
     </div>
   </div>
 
   <!-- Mobile Menu -->
-  <div id="mobile-menu" class="hidden md:hidden px-4 pb-4 bg-white shadow-md transition-all duration-300 ease-in-out">
+  <div id="mobile-menu" class="hidden md:hidden px-4 pb-4 pt-2">
     <a href="#" class="mobile-link">Home</a>
     <a href="#Reasonsofpollution" class="mobile-link">Reasons</a>
     <a href="#laws" class="mobile-link">Laws</a>
     <a href="#contact" class="mobile-link">Contact</a>
+    <a href="/get-involved" class="block text-center bg-blue-600 text-white mt-2 px-4 py-2 rounded-full hover:bg-blue-700 transition transform hover:scale-105 text-sm font-semibold">Join Now</a>
   </div>
 </nav>
 
@@ -237,6 +255,20 @@
 <footer class="bg-gray-800 text-white py-4 text-center text-sm">
   &copy; 2025 ClearWater. All rights reserved.
 </footer>
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const navbar = document.getElementById("navbar");
 
+    window.addEventListener("scroll", () => {
+      if (window.scrollY > 20) {
+        navbar.classList.remove("bg-white/90", "py-3");
+        navbar.classList.add("bg-white/50", "backdrop-blur-xl", "shadow-xl", "py-1");
+      } else {
+        navbar.classList.remove("bg-white/50", "backdrop-blur-xl", "shadow-xl", "py-1");
+        navbar.classList.add("bg-white/90", "py-3");
+      }
+    });
+  });
+</script>
 </body>
 </html>  
