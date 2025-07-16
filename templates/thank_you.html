@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <script src="https://cdn.tailwindcss.com"></script>
-  <title>Thank You -ClearWater</title>
+  <title>Thank You - ClearWater</title>
   <style>
     @keyframes fadeIn {
       from { opacity: 0; transform: translateY(20px); }
@@ -31,9 +31,12 @@
       <div class="text-6xl mb-4">💖</div>
 
       <!-- Thank You Line -->
-      <h1 class="text-4xl sm:text-5xl font-extrabold mb-4 flex flex-wrap justify-center items-center gap-2 text-balance">
+      <h1 class="text-3xl sm:text-5xl font-extrabold mb-4 flex flex-wrap justify-center items-center gap-2 text-center">
         <span class="whitespace-nowrap">Thank You,</span>
-        <span class="inline-block bg-white/90 text-blue-700 px-3 py-1 rounded-md shadow-md ring-1 ring-blue-300 max-w-full sm:max-w-md truncate overflow-hidden text-ellipsis" title="{{ name }}">
+        <span
+          class="inline-block bg-white/90 text-blue-700 px-3 py-1 rounded-md shadow-md ring-1 ring-blue-300 max-w-[250px] sm:max-w-md truncate overflow-hidden whitespace-nowrap"
+          title="{{ name }}"
+        >
           {{ name }}
         </span>!
       </h1>
@@ -56,4 +59,3 @@
 
 </body>
 </html>
-
