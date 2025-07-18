@@ -32,6 +32,14 @@ def submit():
         f.write(f"{name}: {suggestion}\n")
     return redirect(url_for('thank_you', name=name))
 
+@app.route('/terms', methods=['GET'])
+def terms():
+    return render_template('terms.html')
+
+@app.route('/privacy', methods=['GET'])
+def privacy():
+    return render_template('privacy.html')
+
 @app.route('/thank-you')
 def thank_you():
     name = escape(request.args.get('name', 'Friend'))
